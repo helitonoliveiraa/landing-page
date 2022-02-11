@@ -18,6 +18,9 @@
     "prettier/@typescript-eslint",
     "eslint-config-prettier"
   ],
+  "plugins": [
+    "eslint-plugin-import-helpers"
+  ],
   "rules": {
     "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
     "react-hooks/rules-of-hooks": "error",
@@ -28,6 +31,38 @@
       "error",
       {
         "allowSingleExtends": true
+      }
+    ],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          [
+            "/^react/"
+          ],
+          [
+            "/^next/"
+          ],
+          [
+            "module"
+          ],
+          [
+            "/^src//"
+          ],
+          [
+            "/^@//"
+          ],
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
       }
     ]
   }
