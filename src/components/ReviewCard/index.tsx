@@ -1,61 +1,48 @@
-import React, { useEffect } from 'react'
-import ResizeObserver from 'resize-observer-polyfill'
+import React, { useEffect } from 'react';
 
-import * as S from './styles'
+import ResizeObserver from 'resize-observer-polyfill';
 
-type Props = {
-  id: number
-  name: string
-  image: string
-  description: string
-}
+import { Review } from '@/types/api';
+import { getImageUrl } from '@/utils/getImageUrl';
 
-const ReviewCard: React.FC<Props> = ({ id, name, image, description }) => {
+import * as S from './styles';
+
+export function ReviewCard({
+  id,
+  name,
+  photo: { url, alternativeText },
+  text,
+}: Review) {
   useEffect(() => {
-    const texts = document.querySelectorAll('p.description')
+    const texts = document.querySelectorAll('p.description');
 
-    const observer = new ResizeObserver((entries) => {
+    const observer = new ResizeObserver(entries => {
       for (const entry of entries) {
         entry.target.classList[
           entry.target.scrollHeight > entry.contentRect.height + 25
             ? 'add'
             : 'remove'
-        ]('truncated')
+        ]('truncated');
       }
-    })
+    });
 
-    texts.forEach((text) => observer.observe(text))
-  })
+    texts.forEach(text => observer.observe(text));
+  });
 
   return (
     <S.Card>
       <S.User>
-        <S.Image>
-          <source
-            srcSet={require(`@images/reviews/${image}?webp`)}
-            type="image/webp"
-          />
-          <source
-            srcSet={require(`@images/reviews/${image}`)}
-            type="image/jpg"
-          />
-          <img
-            src={require(`@images/reviews/${image}`)}
-            loading="lazy"
-            alt={name}
-          />
-        </S.Image>
+        <S.Image src={getImageUrl(url)} loading="lazy" alt={alternativeText} />
+
         <S.Name>{name}</S.Name>
       </S.User>
       <S.Text>
         <input type="checkbox" id={`review-${id}`} />
-        <p className="description">{description}</p>
+        <p className="description">{text}</p>
         <label className="label-more" htmlFor={`review-${id}`}>
           Ver tudo
         </label>
       </S.Text>
     </S.Card>
-  )
+  );
 }
-
-export default ReviewCard

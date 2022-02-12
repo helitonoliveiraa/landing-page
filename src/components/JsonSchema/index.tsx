@@ -1,5 +1,6 @@
-import React from 'react'
-import { CourseJsonLd, ProductJsonLd } from 'next-seo'
+import React from 'react';
+
+import { CourseJsonLd, ProductJsonLd } from 'next-seo';
 
 const JsonSchema = () => (
   <>
@@ -18,7 +19,7 @@ const JsonSchema = () => (
         {
           author: {
             type: 'Person',
-            name: 'Henrique Albert Schmaiske'
+            name: 'Henrique Albert Schmaiske',
           },
           datePublished: '2020-03-06T12:37:40Z',
           reviewBody:
@@ -27,17 +28,17 @@ const JsonSchema = () => (
           reviewRating: {
             bestRating: '5',
             ratingValue: '5',
-            worstRating: '1'
+            worstRating: '1',
           },
           publisher: {
             type: 'Person',
-            name: 'Henrique Albert Schmaiske'
-          }
-        }
+            name: 'Henrique Albert Schmaiske',
+          },
+        },
       ]}
       aggregateRating={{
         ratingValue: '4.8',
-        reviewCount: '27659'
+        reviewCount: '27659',
       }}
       offers={[
         {
@@ -47,8 +48,8 @@ const JsonSchema = () => (
           url: 'https://reactavancado.com.br/',
           availability: 'https://schema.org/InStock',
           seller: {
-            name: 'Willian Justen Cursos'
-          }
+            name: 'Willian Justen Cursos',
+          },
         },
         {
           price: '579.99',
@@ -57,14 +58,14 @@ const JsonSchema = () => (
           url: 'https://reactavancado.com.br/',
           availability: 'https://schema.org/InStock',
           seller: {
-            name: 'Willian Justen Cursos'
-          }
-        }
+            name: 'Willian Justen Cursos',
+          },
+        },
       ]}
       mpn="reactavancado"
       sku="reactavancado"
     />
   </>
-)
+);
 
-export default JsonSchema
+export default JsonSchema;

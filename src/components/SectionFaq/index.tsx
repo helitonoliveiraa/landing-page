@@ -1,20 +1,21 @@
-import React from 'react'
+import React from 'react';
 
-import Container from 'components/Container'
-import Heading from 'components/Heading'
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
 
-import faq from './content'
-import * as S from './styles'
+import { SectionFaqProps } from '@/types/api';
 
-const SectionFaq = () => (
+import * as S from './styles';
+
+const SectionFaq = ({ title, questions }: SectionFaqProps) => (
   <S.Wrapper>
     <S.Content>
       <Container>
-        <Heading>FAQ</Heading>
+        <Heading>{title}</Heading>
 
         <S.Questions>
-          {faq.map(({ question, answer }, index) => (
-            <S.Question key={index}>
+          {questions.map(({ id, question, answer }) => (
+            <S.Question key={id}>
               <Heading lineBottom>{question}</Heading>
               <div dangerouslySetInnerHTML={{ __html: answer }} />
             </S.Question>
@@ -41,6 +42,6 @@ const SectionFaq = () => (
       </Container>
     </S.Content>
   </S.Wrapper>
-)
+);
 
-export default SectionFaq
+export default SectionFaq;

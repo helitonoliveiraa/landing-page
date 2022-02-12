@@ -1,22 +1,23 @@
-import React from 'react'
+import React from 'react';
 
-import Container from 'components/Container'
-import Heading from 'components/Heading'
+import { Container } from 'components/Container';
+import { Heading } from 'components/Heading';
 
-import content from './content'
-import * as S from './styles'
+import { SectionConceptsProps } from '@/types/api';
 
-const SectionConcepts = () => (
-  <Container>
-    <S.Box>
-      <Heading lineBottom>Conceitos que você irá aprender</Heading>
-      <S.List>
-        {content.map((item) => (
-          <S.Item key={item}>{item}</S.Item>
-        ))}
-      </S.List>
-    </S.Box>
-  </Container>
-)
+import * as S from './styles';
 
-export default SectionConcepts
+export function SectionConcepts({ title, concepts }: SectionConceptsProps) {
+  return (
+    <Container>
+      <S.Box>
+        <Heading lineBottom>{title}</Heading>
+        <S.List>
+          {concepts.map(({ id, title }) => (
+            <S.Item key={id}>{title}</S.Item>
+          ))}
+        </S.List>
+      </S.Box>
+    </Container>
+  );
+}

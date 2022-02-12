@@ -1,24 +1,24 @@
-import React from 'react'
+import React from 'react';
 
-import Heading from 'components/Heading'
-import Container from 'components/Container'
-import CardModule from 'components/CardModule'
+import { CardModule } from '@/components/CardModule';
+import { Container } from '@/components/Container';
+import { Heading } from '@/components/Heading';
+import { SectionModulesProps } from '@/types/api';
 
-import content from './content'
-import * as S from './styles'
+import * as S from './styles';
 
-const SectionModules = () => (
-  <Container>
-    <Heading reverseColor>Módulos deste curso</Heading>
+export function SectionModules({ title, modules }: SectionModulesProps) {
+  return (
+    <Container>
+      <Heading reverseColor>{title}</Heading>
 
-    <S.Content>
-      {content.map(({ title, subtitle, description }, index) => (
-        <CardModule key={index} title={title} subTitle={subtitle}>
-          <div dangerouslySetInnerHTML={{ __html: description }} />
-        </CardModule>
-      ))}
-    </S.Content>
-  </Container>
-)
-
-export default SectionModules
+      <S.Content>
+        {modules.map(({ id, title, subTitle, description }) => (
+          <CardModule key={id} title={title} subTitle={subTitle}>
+            <div dangerouslySetInnerHTML={{ __html: description }} />
+          </CardModule>
+        ))}
+      </S.Content>
+    </Container>
+  );
+}

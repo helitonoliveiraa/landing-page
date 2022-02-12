@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const Analytics = () => (
+export const Analytics = () => (
   <>
     <script
       async
@@ -15,10 +15,8 @@ const Analytics = () => (
             gtag('config', '${process.env.NEXT_PUBLIC_GA_TRACKING}', {
               page_path: window.location.pathname,
             });
-          `
+          `,
       }}
     />
   </>
-)
-
-export default Analytics
+);

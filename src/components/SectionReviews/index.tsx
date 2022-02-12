@@ -1,12 +1,12 @@
-import React from 'react'
-import Slider from 'react-slick'
+import React from 'react';
+import Slider from 'react-slick';
 
-import Container from 'components/Container'
-import Heading from 'components/Heading'
-import ReviewCard from 'components/ReviewCard'
+import { Container } from '@/components/Container';
+import { Heading } from '@/components/Heading';
+import { ReviewCard } from '@/components/ReviewCard';
+import { SectionReviewsProps } from '@/types/api';
 
-import reviews from './content'
-import * as S from './styles'
+import * as S from './styles';
 
 const settings = {
   dots: true,
@@ -24,30 +24,24 @@ const settings = {
         slidesToShow: 1,
         rows: 2,
         slidesPerRow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-}
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
 
-const SectionReviews = () => (
+const SectionReviews = ({ title, reviews }: SectionReviewsProps) => (
   <Container>
-    <Heading reverseColor>Junte-se a mais de 200 mil alunos</Heading>
+    <Heading reverseColor>{title}</Heading>
 
     <S.Content>
       <Slider {...settings}>
-        {reviews.map(({ name, image, description }, index) => (
-          <ReviewCard
-            key={index}
-            name={name}
-            image={image}
-            description={description}
-            id={index}
-          />
+        {reviews.map(({ id, name, text, photo }) => (
+          <ReviewCard key={id} name={name} photo={photo} text={text} id={id} />
         ))}
       </Slider>
     </S.Content>
   </Container>
-)
+);
 
-export default SectionReviews
+export default SectionReviews;

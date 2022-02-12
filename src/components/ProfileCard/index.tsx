@@ -1,62 +1,43 @@
-import React from 'react'
+import React from 'react';
+import { FaDribbble, FaTwitter } from 'react-icons/fa';
+import { GrGithub } from 'react-icons/gr';
 
-import { GrGithub } from 'react-icons/gr'
-import { FaDribbble, FaTwitter } from 'react-icons/fa'
+import { Author } from '@/types/api';
+import { getImageUrl } from '@/utils/getImageUrl';
 
-import * as S from './styles'
+import * as S from './styles';
 
 const icons = {
   twitter: <FaTwitter />,
   github: <GrGithub />,
-  dribbble: <FaDribbble />
-}
+  dribble: <FaDribbble />,
+};
 
-type socialLinks = {
-  slug: string
-  link: string
-}
+type ProfileCardProps = Omit<Author, 'id'>;
 
-type Props = {
-  name: string
-  role: string
-  image: string
-  socialLinks: socialLinks[]
-  description: string
-}
-
-const ProfileCard: React.FC<Props> = ({
+export function ProfileCard({
   name,
   role,
-  image,
+  photo: { url, alternativeText },
   socialLinks,
-  description
-}) => (
-  <S.Card key={name}>
-    <S.Image>
-      <source
-        srcSet={require(`@images/authors/${image}?webp`)}
-        type="image/webp"
-      />
-      <source srcSet={require(`@images/authors/${image}`)} type="image/png" />
-      <img
-        src={require(`@images/authors/${image}`)}
-        loading="lazy"
-        alt={name}
-      />
-    </S.Image>
-    <S.Name>{name}</S.Name>
-    <S.Role>{role}</S.Role>
-    <S.SocialLinks>
-      {socialLinks.map((item) => (
-        <S.Link key={item.link}>
-          <a href={item.link} title={item.slug}>
-            {icons[item.slug]}
-          </a>
-        </S.Link>
-      ))}
-    </S.SocialLinks>
-    <S.Description>{description}</S.Description>
-  </S.Card>
-)
+  description,
+}: ProfileCardProps) {
+  return (
+    <S.Card key={name}>
+      <S.Image src={getImageUrl(url)} loading="lazy" alt={alternativeText} />
 
-export default ProfileCard
+      <S.Name>{name}</S.Name>
+      <S.Role>{role}</S.Role>
+      <S.SocialLinks>
+        {socialLinks.map(({ id, title, url }) => (
+          <S.Link key={id}>
+            <a href={url} title={title}>
+              {icons[title.toLowerCase()]}
+            </a>
+          </S.Link>
+        ))}
+      </S.SocialLinks>
+      <S.Description>{description}</S.Description>
+    </S.Card>
+  );
+}

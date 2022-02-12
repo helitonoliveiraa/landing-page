@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
-import media from 'styled-media-query'
+import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 
-export const Text = styled.div`
+export const TextWrapper = styled.div`
   ${({ theme }) => css`
     display: grid;
     grid-template-columns: 1fr;
@@ -18,4 +18,4 @@ export const Text = styled.div`
       border-bottom: 2px solid ${theme.colors.primary};
     }
   `}
-`
+`;

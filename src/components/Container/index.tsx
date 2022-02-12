@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import * as S from './styles'
+import * as S from './styles';
 
-type Props = {
-  id?: string
-  children: React.ReactNode
-}
+type ContainerProps = {
+  id?: string;
+  children: React.ReactNode;
+};
 
-const Container: React.FC<Props> = ({ children, id }) => (
+const Container: React.FC<ContainerProps> = ({ children, id }) => (
   <S.Container id={id}>{children}</S.Container>
-)
+);
 
-export default Container
+export { Container };

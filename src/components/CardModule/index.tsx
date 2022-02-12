@@ -1,14 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-import * as S from './styles'
+import * as S from './styles';
 
-type Props = {
-  title: string
-  subTitle: string
-  children: React.ReactNode
-}
+type CardModuleProps = {
+  title: string;
+  subTitle: string;
+  children: React.ReactNode;
+};
 
-const CardModule: React.FC<Props> = ({ title, subTitle, children }) => (
+const CardModule: React.FC<CardModuleProps> = ({
+  title,
+  subTitle,
+  children,
+}) => (
   <S.Card>
     <S.TitleWrapper>
       <S.Title>{title}</S.Title>
@@ -17,6 +21,6 @@ const CardModule: React.FC<Props> = ({ title, subTitle, children }) => (
 
     <S.Content>{children}</S.Content>
   </S.Card>
-)
+);
 
-export default CardModule
+export { CardModule };
