@@ -10,7 +10,7 @@ import * as S from './styles';
 const icons = {
   twitter: <FaTwitter />,
   github: <GrGithub />,
-  dribble: <FaDribbble />,
+  dribbble: <FaDribbble />,
 };
 
 type ProfileCardProps = Omit<Author, 'id'>;

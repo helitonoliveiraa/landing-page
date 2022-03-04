@@ -20,7 +20,7 @@ type SectionHeroProps = {
 
 export function SectionHero({
   logo,
-  header: { title, description, button, image },
+  header: { title, description, button, media },
 }: SectionHeroProps) {
   return (
     <S.Wrapper>
@@ -38,7 +38,7 @@ export function SectionHero({
             </S.ButtonWrapper>
           </S.TextBlock>
 
-          <S.Image src={getImageUrl(image.url)} alt={image.alternativeText} />
+          <S.Image src={getImageUrl(media.url)} alt={media.alternativeText} />
         </S.Content>
       </Container>
     </S.Wrapper>

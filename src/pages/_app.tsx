@@ -1,11 +1,12 @@
 import React from 'react';
-import Head from 'next/head';
+
 import { NextSeo } from 'next-seo';
 import { AppProps } from 'next/app';
-import { ThemeProvider } from 'styled-components';
+import Head from 'next/head';
 
-import theme from 'styles/theme';
+import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'styles/global.styles';
+import theme from 'styles/theme';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (

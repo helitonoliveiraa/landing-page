@@ -13,7 +13,7 @@ export function SectionTech({ title, techIcons }: SectionTechProps) {
       <Container>
         <Heading reverseColor>{title}</Heading>
         <S.IconsContainer>
-          {techIcons.map(({ id, title, image: { url, alternativeText } }) => (
+          {techIcons.map(({ id, title, icon: { url, alternativeText } }) => (
             <S.Icon key={id}>
               <S.Icons
                 src={getImageUrl(url)}

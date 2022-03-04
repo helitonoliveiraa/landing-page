@@ -1,10 +1,44 @@
 import { gql } from 'graphql-request';
 
 const GET_LANDING_PAGE = gql`
+  fragment image on UploadFile {
+    alternativeText
+    url
+  }
+
+  fragment buttonComponent on ComponentPageButton {
+    label
+    url
+  }
+
+  fragment author on AuthorEntity {
+    id
+    attributes {
+      photo {
+        data {
+          attributes {
+            ...image
+          }
+        }
+      }
+      name
+      role
+      description
+      socialLinks {
+        id
+        title
+        url
+      }
+    }
+  }
+
   fragment logo on LandingPage {
     logo {
-      alternativeText
-      url
+      data {
+        attributes {
+          ...image
+        }
+      }
     }
   }
 
@@ -13,12 +47,14 @@ const GET_LANDING_PAGE = gql`
       title
       description
       button {
-        label
-        url
+        ...buttonComponent
       }
-      image {
-        alternativeText
-        url
+      media {
+        data {
+          attributes {
+            ...image
+          }
+        }
       }
     }
   }
@@ -27,9 +63,12 @@ const GET_LANDING_PAGE = gql`
     sectionAboutProject {
       title
       description
-      media {
-        alternativeText
-        url
+      image {
+        data {
+          attributes {
+            ...image
+          }
+        }
       }
     }
   }
@@ -40,9 +79,12 @@ const GET_LANDING_PAGE = gql`
       techIcons {
         id
         title
-        image {
-          alternativeText
-          url
+        icon {
+          data {
+            attributes {
+              ...image
+            }
+          }
         }
       }
     }
@@ -84,8 +126,7 @@ const GET_LANDING_PAGE = gql`
       priceInstallment
       benefits
       button {
-        label
-        url
+        ...buttonComponent
       }
     }
   }
@@ -94,18 +135,8 @@ const GET_LANDING_PAGE = gql`
     sectionAboutUs {
       title
       authors {
-        id
-        name
-        role
-        description
-        photo {
-          alternativeText
-          url
-        }
-        socialLinks {
-          id
-          title
-          url
+        data {
+          ...author
         }
       }
     }
@@ -113,14 +144,18 @@ const GET_LANDING_PAGE = gql`
 
   fragment sectionReviews on LandingPage {
     sectionReviews {
+      id
       title
       reviews {
         id
         name
         text
         photo {
-          alternativeText
-          url
+          data {
+            attributes {
+              ...image
+            }
+          }
         }
       }
     }
@@ -145,18 +180,22 @@ const GET_LANDING_PAGE = gql`
 
   query GET_LANDING_PAGE {
     landingPage {
-      ...logo
-      ...header
-      ...sectionAboutProject
-      ...sectionTech
-      ...sectionConcepts
-      ...sectionModules
-      ...sectionAgenda
-      ...pricingBox
-      ...sectionAboutUs
-      ...sectionReviews
-      ...sectionFaq
-      ...footer
+      data {
+        attributes {
+          ...logo
+          ...header
+          ...sectionAboutProject
+          ...sectionTech
+          ...sectionConcepts
+          ...sectionModules
+          ...sectionAgenda
+          ...pricingBox
+          ...sectionAboutUs
+          ...sectionReviews
+          ...sectionFaq
+          ...footer
+        }
+      }
     }
   }
 `;

@@ -11,7 +11,7 @@ export type Button = {
 export type TechIcon = {
   id: string;
   title: string;
-  image: Image;
+  icon: Image;
 };
 
 export type Module = {
@@ -53,13 +53,13 @@ export type HeaderProps = {
   title: string;
   description: string;
   button: Button;
-  image: Image;
+  media: Image;
 };
 
 export type SectionAboutProjectProps = {
   title: string;
   description: string;
-  media: Image;
+  image: Image;
 };
 
 export type SectionTechProps = {
@@ -85,7 +85,7 @@ export type SectionAgendaProps = {
   description: string;
 };
 
-export type FormattedPricingBoxProps = {
+export type pricingBox = {
   totalPrice: string;
   numberInstallments: number;
   priceInstallment: string;
@@ -121,7 +121,7 @@ export type LandingPageProps = {
   sectionConcepts: SectionConceptsProps;
   sectionModules: SectionModulesProps;
   sectionAgenda: SectionAgendaProps;
-  formattedPricing: FormattedPricingBoxProps;
+  pricingBox: pricingBox;
   sectionAboutUs: SectionAboutUsProps;
   sectionReviews: SectionReviewsProps;
   sectionFaq: SectionFaqProps;

@@ -27,7 +27,7 @@ const Index = ({
   sectionConcepts,
   sectionModules,
   sectionAgenda,
-  formattedPricing,
+  pricingBox,
   sectionAboutUs,
   sectionReviews,
   sectionFaq,
@@ -40,7 +40,7 @@ const Index = ({
     <SectionConcepts {...sectionConcepts} />
     <SectionModules {...sectionModules} />
     <SectionAgenda {...sectionAgenda} />
-    <PricingBox {...formattedPricing} />
+    <PricingBox {...pricingBox} />
     <SectionAboutUs {...sectionAboutUs} />
     <SectionReviews {...sectionReviews} />
     <SectionFaq {...sectionFaq} />
@@ -50,7 +50,9 @@ const Index = ({
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { landingPage } = await client.request(GET_LANDING_PAGE);
+  const {
+    landingPage: { data },
+  } = await client.request(GET_LANDING_PAGE);
 
   const {
     logo,
@@ -65,33 +67,88 @@ export const getStaticProps: GetStaticProps = async () => {
     sectionReviews,
     sectionFaq,
     footer,
-  } = landingPage;
+  } = data.attributes;
 
-  const discount = pricingBox.numberInstallments * pricingBox.priceInstallment;
+  const discount =
+    pricingBox.totalPrice -
+    pricingBox.numberInstallments * pricingBox.priceInstallment;
 
-  const formattedPricing = {
-    ...pricingBox,
-    totalPrice: formatPrice(pricingBox.totalPrice),
-    priceInstallment: formatPrice(pricingBox.priceInstallment),
-    discount: formatPrice(discount),
+  const landingPage = {
+    logo: {
+      url: logo.data.attributes.url,
+      alternativeText: logo.data.attributes.alternativeText,
+    },
+    header: {
+      ...header,
+      title: header.title,
+      media: {
+        url: header.media.data.attributes.url,
+        alternativeText: header.media.data.attributes.alternativeText,
+      },
+    },
+    sectionAboutProject: {
+      ...sectionAboutProject,
+      image: {
+        url: sectionAboutProject.image.data.attributes.url,
+        alternativeText:
+          sectionAboutProject.image.data.attributes.alternativeText,
+      },
+    },
+    sectionTech: {
+      ...sectionTech,
+      techIcons: sectionTech.techIcons.map(techIcon => ({
+        ...techIcon,
+        icon: {
+          url: techIcon.icon.data.attributes.url,
+          alternativeText: techIcon.icon.data.attributes.alternativeText,
+        },
+      })),
+    },
+    sectionConcepts,
+    sectionModules,
+    sectionAgenda,
+    pricingBox: {
+      ...pricingBox,
+      totalPrice: formatPrice(pricingBox.totalPrice),
+      priceInstallment: formatPrice(pricingBox.priceInstallment),
+      discount: formatPrice(discount),
+    },
+    sectionAboutUs: {
+      ...sectionAboutUs,
+      authors: sectionAboutUs.authors.data.map(author => {
+        return {
+          id: author.id,
+          photo: {
+            alternativeText:
+              author.attributes.photo.data.attributes.alternativeText,
+            url: author.attributes.photo.data.attributes.url,
+          },
+          name: author.attributes.name,
+          role: author.attributes.role,
+          description: author.attributes.description,
+          socialLinks: author.attributes.socialLinks,
+        };
+      }),
+    },
+    sectionReviews: {
+      ...sectionReviews,
+      reviews: sectionReviews.reviews.map(review => {
+        return {
+          ...review,
+          photo: {
+            alternativeText: review.photo.data.attributes.alternativeText,
+            url: review.photo.data.attributes.url,
+          },
+        };
+      }),
+    },
+    sectionFaq,
+    footer,
   };
-
-  console.log(JSON.stringify(footer, null, 2));
 
   return {
     props: {
-      logo,
-      header,
-      sectionAboutProject,
-      sectionTech,
-      sectionConcepts,
-      sectionModules,
-      sectionAgenda,
-      formattedPricing,
-      sectionAboutUs,
-      sectionReviews,
-      sectionFaq,
-      footer,
+      ...landingPage,
     },
   };
 };

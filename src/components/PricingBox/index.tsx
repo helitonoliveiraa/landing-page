@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button } from '@/components/Button';
-import { FormattedPricingBoxProps } from '@/types/api';
+import { pricingBox } from '@/types/api';
 import { gaEvent } from '@/utils/ga';
 
 import * as S from './styles';
@@ -16,7 +16,7 @@ const PricingBox = ({
   benefits,
   discount,
   button: { url, label },
-}: FormattedPricingBoxProps) => (
+}: pricingBox) => (
   <S.Box>
     <S.Prices>
       <S.FullPrice>

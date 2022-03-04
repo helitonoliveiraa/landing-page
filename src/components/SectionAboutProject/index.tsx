@@ -10,7 +10,7 @@ import * as S from './styles';
 export function SectionAboutProject({
   title,
   description,
-  media: { url, alternativeText },
+  image: { url, alternativeText },
 }: SectionAboutProjectProps) {
   return (
     <S.Wrapper>
