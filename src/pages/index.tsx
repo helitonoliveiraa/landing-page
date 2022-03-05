@@ -69,9 +69,7 @@ export const getStaticProps: GetStaticProps = async () => {
     footer,
   } = data.attributes;
 
-  const discount =
-    pricingBox.totalPrice -
-    pricingBox.numberInstallments * pricingBox.priceInstallment;
+  const discount = pricingBox.numberInstallments * pricingBox.priceInstallment;
 
   const landingPage = {
     logo: {

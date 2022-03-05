@@ -15,7 +15,7 @@ const PricingBox = ({
   priceInstallment,
   benefits,
   discount,
-  button: { url, label },
+  button: { label, url },
 }: pricingBox) => (
   <S.Box>
     <S.Prices>
